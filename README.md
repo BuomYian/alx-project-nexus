@@ -140,21 +140,51 @@ This section documents real-world challenges encountered during the program and 
 alx-project-nexus/
 ├── README.md                 # This file - Project overview and guide
 ├── .git/                     # Git version control
-└── docs/                     # Documentation directory (to be expanded)
-    ├── technologies/         # Deep dives into key technologies
-    ├── concepts/            # Backend engineering concepts
-    ├── challenges/          # Real-world challenges and solutions
-    └── best-practices/      # Industry best practices and takeaways
+├── docs/                     # Documentation directory
+│   └── (to be expanded with additional resources)
+└── projects/                 # ProDev Backend Engineering Projects
+    ├── ecommerce-backend/    # E-Commerce Backend Project
+    │   ├── README.md         # Complete project overview
+    │   ├── IMPLEMENTATION_GUIDE.md  # Step-by-step implementation with code
+    │   └── API_SPECIFICATION.md     # Complete API documentation
+    └── (additional projects to be added)
 ```
+
+---
+
+## Featured Projects
+
+### 🛒 E-Commerce Backend
+A comprehensive backend system for an e-commerce platform demonstrating real-world scalability, security, and performance optimization.
+
+**What You'll Learn:**
+- Building robust RESTful APIs with Django and Django REST Framework
+- Database schema design and optimization with PostgreSQL
+- Advanced filtering, sorting, and pagination techniques
+- JWT authentication and authorization
+- API documentation with Swagger/OpenAPI
+
+**Quick Links:**
+- [Project Overview](projects/ecommerce-backend/README.md)
+- [Implementation Guide](projects/ecommerce-backend/IMPLEMENTATION_GUIDE.md)
+- [API Specification](projects/ecommerce-backend/API_SPECIFICATION.md)
+
+**Key Features:**
+- Complete CRUD operations for products, categories, and users
+- Advanced product filtering and search capabilities
+- Strategic database indexing for optimal performance
+- Comprehensive API documentation
+- Production-ready authentication with JWT
 
 ---
 
 ## Getting Started
 
-1. **Explore the Documentation**: Start with the key topics that interest you
-2. **Review Best Practices**: Learn from documented solutions and approaches
-3. **Collaborate**: Connect with peers in the Discord channel
-4. **Contribute**: Share your learnings and insights
+1. **Explore the Documentation**: Start with the [Project Overview](projects/ecommerce-backend/README.md)
+2. **Review Implementation Guide**: Follow the [Step-by-Step Guide](projects/ecommerce-backend/IMPLEMENTATION_GUIDE.md) with code examples
+3. **Check API Specification**: Reference the [API Docs](projects/ecommerce-backend/API_SPECIFICATION.md) for endpoint details
+4. **Collaborate**: Connect with peers in the Discord channel
+5. **Contribute**: Share your learnings and improvements
 
 ---
 
