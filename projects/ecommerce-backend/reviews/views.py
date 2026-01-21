@@ -33,7 +33,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         """Create review with current user"""
         product_id = self.kwargs.get('product_id')
-        
+
         try:
             product = Product.objects.get(id=product_id)
         except Product.DoesNotExist:
@@ -41,7 +41,8 @@ class ReviewViewSet(viewsets.ModelViewSet):
 
         # Check if user already reviewed this product
         if Review.objects.filter(product=product, user=self.request.user).exists():
-            raise ValidationError({'error': 'You have already reviewed this product'})
+            raise ValidationError(
+                {'error': 'You have already reviewed this product'})
 
         serializer.save(product=product, user=self.request.user)
 
@@ -49,13 +50,15 @@ class ReviewViewSet(viewsets.ModelViewSet):
         """Only allow users to update their own reviews"""
         review = self.get_object()
         if review.user != self.request.user:
-            raise ValidationError({'error': 'You can only update your own reviews'})
+            raise ValidationError(
+                {'error': 'You can only update your own reviews'})
         serializer.save()
 
     def perform_destroy(self, instance):
         """Only allow users to delete their own reviews"""
         if instance.user != self.request.user and not self.request.user.is_staff:
-            raise ValidationError({'error': 'You can only delete your own reviews'})
+            raise ValidationError(
+                {'error': 'You can only delete your own reviews'})
         instance.delete()
 
     @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated])
@@ -85,7 +88,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
                 {'error': 'Rating parameter is required'},
                 status=status.HTTP_400_BAD_REQUEST
             )
-        
+
         reviews = self.get_queryset().filter(rating=rating)
         serializer = self.get_serializer(reviews, many=True)
         return Response(serializer.data)

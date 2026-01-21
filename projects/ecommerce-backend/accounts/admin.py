@@ -19,6 +19,7 @@ class UserAdmin(BaseUserAdmin):
             )
         }),
     )
-    list_display = ('username', 'email', 'first_name', 'last_name', 'is_verified', 'created_at')
+    list_display = ('username', 'email', 'first_name',
+                    'last_name', 'is_verified', 'created_at')
     list_filter = ('is_verified', 'is_email_verified', 'created_at')
     search_fields = ('email', 'username', 'first_name', 'last_name')

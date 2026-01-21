@@ -17,7 +17,8 @@ class CategoryViewSet(viewsets.ModelViewSet):
     """ViewSet for category CRUD operations"""
     queryset = Category.objects.filter(is_active=True)
     permission_classes = [IsAuthenticatedOrReadOnly]
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filter_backends = [DjangoFilterBackend,
+                       filters.SearchFilter, filters.OrderingFilter]
     search_fields = ['name', 'description']
     ordering_fields = ['name', 'display_order', 'created_at']
     ordering = ['display_order', 'name']

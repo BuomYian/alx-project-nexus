@@ -20,7 +20,8 @@ class ProductViewSet(viewsets.ModelViewSet):
     """ViewSet for product CRUD operations with advanced filtering and pagination"""
     queryset = Product.objects.filter(is_active=True)
     permission_classes = [IsAuthenticatedOrReadOnly]
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filter_backends = [DjangoFilterBackend,
+                       filters.SearchFilter, filters.OrderingFilter]
     filterset_class = ProductFilter
     search_fields = ['name', 'description', 'sku']
     ordering_fields = ['price', 'created_at', 'sales_count', 'average_rating']
@@ -35,11 +36,11 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        
+
         # Include inactive products for staff
         if self.request.user and self.request.user.is_staff:
             queryset = Product.objects.all()
-        
+
         # Optimize queries
         return queryset.select_related('category').prefetch_related('attributes')
 
@@ -59,7 +60,8 @@ class ProductViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['get'], permission_classes=[IsAuthenticatedOrReadOnly])
     def featured(self, request):
         """Get featured products"""
-        products = self.get_queryset().filter(is_featured=True).order_by('-sales_count')[:10]
+        products = self.get_queryset().filter(
+            is_featured=True).order_by('-sales_count')[:10]
         serializer = self.get_serializer(products, many=True)
         return Response(serializer.data)
 

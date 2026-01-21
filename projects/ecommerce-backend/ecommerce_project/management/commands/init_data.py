@@ -17,22 +17,22 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         self.stdout.write('🚀 Initializing E-Commerce Backend...')
-        
+
         # Create admin user
         self.create_admin_user()
-        
+
         # Create sample users
         self.create_sample_users()
-        
+
         # Create categories
         self.create_categories()
-        
+
         # Create products
         self.create_products()
-        
+
         # Create reviews
         self.create_reviews()
-        
+
         self.stdout.write(self.style.SUCCESS('✅ Initialization complete!'))
 
     def create_admin_user(self):
@@ -48,11 +48,14 @@ class Command(BaseCommand):
     def create_sample_users(self):
         """Create sample users"""
         users = [
-            {'username': 'john', 'email': 'john@example.com', 'first_name': 'John', 'last_name': 'Doe'},
-            {'username': 'jane', 'email': 'jane@example.com', 'first_name': 'Jane', 'last_name': 'Smith'},
-            {'username': 'bob', 'email': 'bob@example.com', 'first_name': 'Bob', 'last_name': 'Johnson'},
+            {'username': 'john', 'email': 'john@example.com',
+                'first_name': 'John', 'last_name': 'Doe'},
+            {'username': 'jane', 'email': 'jane@example.com',
+                'first_name': 'Jane', 'last_name': 'Smith'},
+            {'username': 'bob', 'email': 'bob@example.com',
+                'first_name': 'Bob', 'last_name': 'Johnson'},
         ]
-        
+
         for user_data in users:
             if not User.objects.filter(username=user_data['username']).exists():
                 User.objects.create_user(
@@ -73,11 +76,11 @@ class Command(BaseCommand):
             {'name': 'Home & Kitchen', 'description': 'Home and kitchen appliances'},
             {'name': 'Sports', 'description': 'Sports equipment and accessories'},
         ]
-        
+
         for cat_data in categories_data:
             if not Category.objects.filter(name=cat_data['name']).exists():
                 Category.objects.create(**cat_data)
-        
+
         self.stdout.write('✓ Created categories')
 
     def create_products(self):
@@ -86,7 +89,7 @@ class Command(BaseCommand):
         electronics = Category.objects.get(name='Electronics')
         clothing = Category.objects.get(name='Clothing')
         books = Category.objects.get(name='Books')
-        
+
         products_data = [
             {
                 'name': 'Wireless Headphones',
@@ -149,7 +152,7 @@ class Command(BaseCommand):
                 ]
             },
         ]
-        
+
         for prod_data in products_data:
             if not Product.objects.filter(sku=prod_data['sku']).exists():
                 attributes_data = prod_data.pop('attributes', [])
@@ -157,24 +160,28 @@ class Command(BaseCommand):
                     **prod_data,
                     created_by=admin
                 )
-                
+
                 # Add attributes
                 for attr_data in attributes_data:
-                    ProductAttribute.objects.create(product=product, **attr_data)
-        
+                    ProductAttribute.objects.create(
+                        product=product, **attr_data)
+
         self.stdout.write('✓ Created sample products')
 
     def create_reviews(self):
         """Create sample reviews"""
         users = User.objects.filter(username__in=['john', 'jane', 'bob'])
         products = Product.objects.all()[:3]
-        
+
         reviews_data = [
-            {'rating': 5, 'title': 'Excellent product!', 'comment': 'Great quality and fast delivery. Highly recommended!'},
-            {'rating': 4, 'title': 'Very good', 'comment': 'Good product but could be better in some aspects.'},
-            {'rating': 3, 'title': 'Average', 'comment': 'It\'s okay, does what it\'s supposed to do.'},
+            {'rating': 5, 'title': 'Excellent product!',
+                'comment': 'Great quality and fast delivery. Highly recommended!'},
+            {'rating': 4, 'title': 'Very good',
+                'comment': 'Good product but could be better in some aspects.'},
+            {'rating': 3, 'title': 'Average',
+                'comment': 'It\'s okay, does what it\'s supposed to do.'},
         ]
-        
+
         for product in products:
             for user in users:
                 if not Review.objects.filter(product=product, user=user).exists():
@@ -188,5 +195,5 @@ class Command(BaseCommand):
                         is_verified_purchase=True
                     )
                     reviews_data = reviews_data[1:] + [reviews_data[0]]
-        
+
         self.stdout.write('✓ Created sample reviews')

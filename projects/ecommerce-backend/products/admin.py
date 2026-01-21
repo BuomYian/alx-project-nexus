@@ -15,11 +15,13 @@ class ProductAttributeInline(admin.TabularInline):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     """Product admin"""
-    list_display = ('name', 'sku', 'category', 'price', 'quantity_in_stock', 'is_active', 'created_at')
+    list_display = ('name', 'sku', 'category', 'price',
+                    'quantity_in_stock', 'is_active', 'created_at')
     list_filter = ('is_active', 'is_featured', 'category', 'created_at')
     search_fields = ('name', 'description', 'sku')
     prepopulated_fields = {'slug': ('name',)}
-    readonly_fields = ('average_rating', 'review_count', 'sales_count', 'created_at', 'updated_at')
+    readonly_fields = ('average_rating', 'review_count',
+                       'sales_count', 'created_at', 'updated_at')
     fieldsets = (
         ('Basic Information', {
             'fields': ('name', 'slug', 'description', 'short_description', 'sku')

@@ -45,12 +45,14 @@ class TestAuthentication:
             'email': 'test@example.com',
             'password': 'testpass123'
         }
-        login_response = api_client.post('/api/auth/login/', login_data, format='json')
+        login_response = api_client.post(
+            '/api/auth/login/', login_data, format='json')
         refresh_token = login_response.data['refresh']
-        
+
         # Now refresh the token
         refresh_data = {'refresh': refresh_token}
-        response = api_client.post('/api/auth/refresh/', refresh_data, format='json')
+        response = api_client.post(
+            '/api/auth/refresh/', refresh_data, format='json')
         assert response.status_code == status.HTTP_200_OK
         assert 'access' in response.data
 
@@ -66,7 +68,8 @@ class TestAuthentication:
             'first_name': 'John',
             'last_name': 'Doe'
         }
-        response = authenticated_client.put('/api/auth/users/update_profile/', data, format='json')
+        response = authenticated_client.put(
+            '/api/auth/users/update_profile/', data, format='json')
         assert response.status_code == status.HTTP_200_OK
 
     def test_password_mismatch_registration(self, api_client):

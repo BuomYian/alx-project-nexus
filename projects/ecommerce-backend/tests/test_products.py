@@ -31,7 +31,8 @@ class TestProductAPI:
             'category': category.id,
             'image': 'test.jpg'
         }
-        response = authenticated_client.post('/api/products/', data, format='json')
+        response = authenticated_client.post(
+            '/api/products/', data, format='json')
         assert response.status_code == status.HTTP_201_CREATED
 
     def test_filter_products_by_category(self, api_client, create_product, create_category):

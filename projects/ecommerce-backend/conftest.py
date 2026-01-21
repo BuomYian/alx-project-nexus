@@ -52,7 +52,7 @@ def create_product(db, create_category, create_user):
             category = create_category()
         if not created_by:
             created_by = create_user()
-        
+
         return Product.objects.create(
             name=name,
             sku=sku,
