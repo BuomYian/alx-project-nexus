@@ -1,0 +1,30 @@
+FROM python:3.11-alpine
+
+WORKDIR /app
+
+# Install dependencies
+RUN apk add --no-cache \
+    postgresql-client \
+    postgresql-dev \
+    build-base \
+    gcc \
+    musl-dev
+
+# Copy requirements
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy project
+COPY . .
+
+# Create necessary directories
+RUN mkdir -p logs media staticfiles
+
+# Collect static files
+RUN python manage.py collectstatic --noinput || true
+
+EXPOSE 8000
+
+CMD ["gunicorn", "ecommerce_project.wsgi:application", "--bind", "0.0.0.0:8000"]
