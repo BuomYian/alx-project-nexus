@@ -549,5 +549,3 @@ This project is part of the ProDev Backend Engineering program.
 **Created**: January 2026  
 **Version**: 1.0.0  
 **Status**: Production Ready  
-
-For detailed setup instructions, see [SETUP.md](./SETUP.md)
