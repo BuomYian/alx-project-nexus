@@ -41,6 +41,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'authentication.middleware.SessionManagementMiddleware',
+    'utils.rate_limiting.RateLimitMiddleware',
 ]
 
 ROOT_URLCONF = 'social_project.urls'
@@ -135,6 +136,17 @@ REST_FRAMEWORK = {
         'rest_framework.filters.SearchFilter',
         'rest_framework.filters.OrderingFilter',
     ],
+    'DEFAULT_THROTTLE_CLASSES': [
+        'utils.rate_limiting.CustomUserRateThrottle',
+        'utils.rate_limiting.CustomAnonRateThrottle',
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'user': '1000/day',
+        'anon': '100/day',
+        'search': '100/hour',
+        'auth': '5/minute',
+        'upload': '10/hour',
+    }
 }
 
 # JWT Configuration
@@ -164,6 +176,35 @@ SESSION_COOKIE_AGE = 3600  # 1 hour
 
 # Redis Configuration
 REDIS_URL = config('REDIS_URL', default='redis://localhost:6379/0')
+
+# Caching Configuration with Redis
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': REDIS_URL,
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            'SOCKET_CONNECT_TIMEOUT': 5,
+            'SOCKET_TIMEOUT': 5,
+            'COMPRESSOR': 'django_redis.compressors.zlib.ZlibCompressor',
+            'IGNORE_EXCEPTIONS': True,  # Fallback to database if Redis unavailable
+        },
+        'KEY_PREFIX': 'social_media',
+        'TIMEOUT': 300,  # 5 minutes default timeout
+    },
+    'sessions': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': REDIS_URL,
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
+
+# Cache Configuration for Search Results
+SEARCH_CACHE_TIMEOUT = 600  # 10 minutes for search results
+POST_CACHE_TIMEOUT = 300  # 5 minutes for posts
+FEED_CACHE_TIMEOUT = 60  # 1 minute for feed (more dynamic)
 
 # Celery Configuration
 CELERY_BROKER_URL = REDIS_URL

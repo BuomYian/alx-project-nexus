@@ -2,12 +2,13 @@ from rest_framework import serializers
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
+from django.utils import timezone
+from datetime import datetime
 from .models import UserSession, LoginAttempt
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     """Custom token serializer with refresh token rotation"""
-    email = serializers.EmailField()
 
     def validate(self, attrs):
         data = super().validate(attrs)
@@ -26,10 +27,11 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         
         # Create user session
         refresh = RefreshToken.for_user(user)
+        expires_at = datetime.fromtimestamp(refresh['exp'], tz=timezone.utc)
         UserSession.objects.create(
             user=user,
             refresh_token=str(refresh),
-            expires_at=refresh.get_exp_time(),
+            expires_at=expires_at,
             ip_address=self.context.get('request').META.get('REMOTE_ADDR', ''),
             user_agent=self.context.get('request').META.get('HTTP_USER_AGENT', '')
         )

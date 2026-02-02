@@ -53,9 +53,6 @@ A production-ready e-commerce backend API built with Django, Django REST Framewo
 | File | Purpose |
 |------|---------|
 | [README.md](./README.md) | Complete project overview |
-| [QUICK_REFERENCE.md](./QUICK_REFERENCE.md) | Quick commands and examples |
-| [SETUP.md](./SETUP.md) | Detailed setup and installation guide |
-| [API_SPECIFICATION.md](./API_SPECIFICATION.md) | Complete API endpoint documentation |
 | [IMPLEMENTATION_GUIDE.md](./IMPLEMENTATION_GUIDE.md) | Code examples and implementation details |
 
 ---

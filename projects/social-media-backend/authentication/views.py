@@ -6,7 +6,9 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth.models import User
 from django.utils import timezone
+from datetime import datetime
 from django.views.decorators.http import require_http_methods
+from django.views.decorators.cache import cache_page
 from .models import UserSession, LoginAttempt, TokenBlacklistLog
 from .serializers import (
     CustomTokenObtainPairSerializer,
@@ -16,17 +18,20 @@ from .serializers import (
     LoginAttemptSerializer,
     RefreshTokenSerializer
 )
+from utils.rate_limiting import AuthenticationRateThrottle
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):
-    """Custom login endpoint with session tracking"""
+    """Custom login endpoint with session tracking and rate limiting"""
     serializer_class = CustomTokenObtainPairSerializer
     permission_classes = (AllowAny,)
+    throttle_classes = [AuthenticationRateThrottle]
 
 
 class CustomTokenRefreshView(TokenRefreshView):
     """Custom token refresh with rotation"""
     permission_classes = (AllowAny,)
+    throttle_classes = [AuthenticationRateThrottle]
 
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
@@ -64,12 +69,13 @@ def register(request):
         
         # Generate tokens
         refresh = RefreshToken.for_user(user)
+        expires_at = datetime.fromtimestamp(refresh['exp'], tz=timezone.utc)
         
         # Create session
         UserSession.objects.create(
             user=user,
             refresh_token=str(refresh),
-            expires_at=refresh.get_exp_time(),
+            expires_at=expires_at,
             ip_address=request.META.get('REMOTE_ADDR', ''),
             user_agent=request.META.get('HTTP_USER_AGENT', '')
         )
