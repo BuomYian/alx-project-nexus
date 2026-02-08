@@ -25,6 +25,8 @@ RUN mkdir -p logs media staticfiles
 # Collect static files
 RUN python manage.py collectstatic --noinput || true
 
-EXPOSE 8000
+# Use PORT environment variable (Railway sets this)
+ENV PORT 8000
+EXPOSE $PORT
 
-CMD ["gunicorn", "ecommerce_project.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["sh", "-c", "gunicorn ecommerce_project.wsgi:application --bind 0.0.0.0:$PORT --workers 4"]
