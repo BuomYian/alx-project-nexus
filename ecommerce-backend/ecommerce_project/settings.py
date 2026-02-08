@@ -77,32 +77,16 @@ TEMPLATES = [
 WSGI_APPLICATION = 'ecommerce_project.wsgi.application'
 
 # Database
-# Support both DATABASE_URL and individual DB_* variables
-import dj_database_url
-
-DATABASE_URL = os.getenv('DATABASE_URL')
-
-if DATABASE_URL:
-    # Use DATABASE_URL if available (Railway PostgreSQL default)
-    DATABASES = {
-        'default': dj_database_url.config(
-            default=DATABASE_URL,
-            conn_max_age=600,
-            conn_health_checks=True,
-        )
+DATABASES = {
+    'default': {
+        'ENGINE': os.getenv('DB_ENGINE', 'django.db.backends.sqlite3'),
+        'NAME': os.getenv('DB_NAME', BASE_DIR / 'db.sqlite3'),
+        'USER': os.getenv('DB_USER', ''),
+        'PASSWORD': os.getenv('DB_PASSWORD', ''),
+        'HOST': os.getenv('DB_HOST', ''),
+        'PORT': os.getenv('DB_PORT', ''),
     }
-else:
-    # Fall back to individual DB_* environment variables
-    DATABASES = {
-        'default': {
-            'ENGINE': os.getenv('DB_ENGINE', 'django.db.backends.sqlite3'),
-            'NAME': os.getenv('DB_NAME', BASE_DIR / 'db.sqlite3'),
-            'USER': os.getenv('DB_USER', ''),
-            'PASSWORD': os.getenv('DB_PASSWORD', ''),
-            'HOST': os.getenv('DB_HOST', ''),
-            'PORT': os.getenv('DB_PORT', ''),
-        }
-    }
+}
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
