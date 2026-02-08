@@ -1,0 +1,15 @@
+.git
+.gitignore
+README.md
+ecommerce-backend/.env
+ecommerce-backend/db.sqlite3
+ecommerce-backend/.venv
+ecommerce-backend/venv
+ecommerce-backend/__pycache__
+ecommerce-backend/*/__pycache__
+ecommerce-backend/*/migrations/__pycache__
+ecommerce-backend/.pytest_cache
+ecommerce-backend/logs
+ecommerce-backend/*.pyc
+ecommerce-backend/.idea
+ecommerce-backend/.vscode
