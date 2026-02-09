@@ -6,6 +6,7 @@ import os
 from pathlib import Path
 from datetime import timedelta
 from dotenv import load_dotenv
+import dj_database_url
 
 # Build paths
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -77,47 +78,16 @@ TEMPLATES = [
 WSGI_APPLICATION = 'ecommerce_project.wsgi.application'
 
 # Database
-# Check if DATABASE_URL is set (Railway environment)
-if os.environ.get('DATABASE_URL'):
-    try:
-        import dj_database_url
-        DATABASES = {
-            'default': dj_database_url.config(
-                conn_max_age=600,
-                conn_health_checks=True,
-            )
-        }
-    except Exception:
-        # Fallback if dj_database_url fails
-        DATABASES = {
-            'default': {
-                'ENGINE': 'django.db.backends.sqlite3',
-                'NAME': str(BASE_DIR / 'db.sqlite3'),
-            }
-        }
-else:
-    # Local development - use environment variables or SQLite
-    db_engine = os.environ.get('DB_ENGINE', 'django.db.backends.sqlite3')
-    
-    if db_engine == 'django.db.backends.postgresql':
-        DATABASES = {
-            'default': {
-                'ENGINE': db_engine,
-                'NAME': os.environ.get('DB_NAME', 'ecommerce_db'),
-                'USER': os.environ.get('DB_USER', 'postgres'),
-                'PASSWORD': os.environ.get('DB_PASSWORD', ''),
-                'HOST': os.environ.get('DB_HOST', 'localhost'),
-                'PORT': os.environ.get('DB_PORT', '5432'),
-            }
-        }
-    else:
-        # SQLite for local development
-        DATABASES = {
-            'default': {
-                'ENGINE': 'django.db.backends.sqlite3',
-                'NAME': str(BASE_DIR / 'db.sqlite3'),
-            }
-        }
+# Use dj_database_url to parse DATABASE_URL (Railway provides this)
+# Falls back to SQLite for local development if DATABASE_URL is not set
+DATABASES = {
+    'default': dj_database_url.config(
+        default=f"sqlite:///{str(BASE_DIR / 'db.sqlite3')}",
+        conn_max_age=600,
+        conn_health_checks=True,
+        ssl_require=not DEBUG,
+    )
+}
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
