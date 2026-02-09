@@ -21,7 +21,9 @@ This project aims to:
 ## Key Features
 
 ### 📚 Comprehensive Documentation
+
 This repository covers essential backend engineering concepts including:
+
 - **RESTful APIs**: Design patterns, HTTP methods, status codes, and best practices
 - **GraphQL APIs**: Query language fundamentals, schema design, and optimization techniques
 - **Message Queues**: Asynchronous messaging, event-driven architecture
@@ -30,6 +32,7 @@ This repository covers essential backend engineering concepts including:
 - **System Design**: Scalability, reliability, and architectural patterns
 
 ### 🛠️ Key Technologies Covered
+
 - **Python**: Core language for backend development
 - **Django**: Full-featured web framework for building robust applications
 - **REST APIs**: Building scalable web services
@@ -38,6 +41,7 @@ This repository covers essential backend engineering concepts including:
 - **CI/CD**: Automated testing and deployment pipelines
 
 ### 💡 Important Backend Development Concepts
+
 - **Database Design**: Schema design, normalization, and query optimization
 - **Asynchronous Programming**: Non-blocking operations, async/await patterns
 - **Caching Strategies**: Redis, in-memory caching, cache invalidation
@@ -46,7 +50,9 @@ This repository covers essential backend engineering concepts including:
 - **API Versioning**: Managing breaking changes and backward compatibility
 
 ### 🎯 Challenges & Solutions
+
 This section documents real-world challenges encountered during the program and the implemented solutions:
+
 - **Challenge**: Handling concurrent database operations safely
   - **Solution**: Implemented transaction management and connection pooling
 
@@ -62,30 +68,35 @@ This section documents real-world challenges encountered during the program and 
 ### ⭐ Best Practices & Takeaways
 
 #### Code Quality
+
 - Write clean, readable, and maintainable code
 - Follow PEP 8 standards for Python development
 - Use type hints for better code clarity
 - Implement comprehensive unit and integration tests
 
 #### API Design
+
 - Follow RESTful principles strictly
 - Use consistent naming conventions
 - Implement proper error handling and logging
 - Version your APIs for backward compatibility
 
 #### Database Management
+
 - Design normalized database schemas
 - Use indexes strategically for query optimization
 - Implement proper migration strategies
 - Monitor query performance regularly
 
 #### System Architecture
+
 - Build modular, decoupled components
 - Use design patterns appropriately
 - Plan for scalability from the start
 - Implement proper monitoring and observability
 
 #### Collaboration & Communication
+
 - Document code and APIs thoroughly
 - Communicate early and often with team members
 - Use version control effectively
@@ -98,12 +109,14 @@ This section documents real-world challenges encountered during the program and 
 ### 🤝 Collaborate With:
 
 #### Fellow ProDev Backend Learners
+
 - Exchange ideas and best practices
 - Develop synergies for group learning
 - Organize study sessions and code reviews
 - Share solutions to common challenges
 
 #### ProDev Frontend Learners
+
 - **Essential Collaboration**: Frontend learners will use your backend API endpoints to complete their projects
 - Define clear API contracts and documentation
 - Ensure consistent data formats and response structures
@@ -112,6 +125,7 @@ This section documents real-world challenges encountered during the program and 
 ### 💬 Where to Collaborate?
 
 #### Dedicated Discord Channel: #ProDevProjectNexus
+
 - Connect with both Frontend and Backend learners
 - Share ideas and discuss approaches
 - Ask and answer technical questions
@@ -121,12 +135,14 @@ This section documents real-world challenges encountered during the program and 
 ### 💡 ProDev Tips for Success
 
 #### First Week Priorities
+
 - 📢 **Communicate** which project you are developing
 - 🔍 **Identify** ProDev Frontend learners working on the same project
 - 📋 **Define** API contracts and data models with frontend team
 - 🎯 **Establish** communication protocols and collaboration schedule
 
 #### Throughout the Program
+
 - Maintain regular communication with frontend partners
 - Document API changes and notify collaborators
 - Request and provide feedback on implementations
@@ -134,30 +150,14 @@ This section documents real-world challenges encountered during the program and 
 
 ---
 
-## Repository Structure
-
-```
-alx-project-nexus/
-├── README.md                 # This file - Project overview and guide
-├── .git/                     # Git version control
-├── docs/                     # Documentation directory
-│   └── (to be expanded with additional resources)
-└── projects/                 # ProDev Backend Engineering Projects
-    ├── ecommerce-backend/    # E-Commerce Backend Project
-    │   ├── README.md         # Complete project overview
-    │   ├── IMPLEMENTATION_GUIDE.md  # Step-by-step implementation with code
-    │   └── API_SPECIFICATION.md     # Complete API documentation
-    └── (additional projects to be added)
-```
-
----
-
 ## Featured Projects
 
 ### 🛒 E-Commerce Backend
+
 A comprehensive backend system for an e-commerce platform demonstrating real-world scalability, security, and performance optimization.
 
 **What You'll Learn:**
+
 - Building robust RESTful APIs with Django and Django REST Framework
 - Database schema design and optimization with PostgreSQL
 - Advanced filtering, sorting, and pagination techniques
@@ -165,11 +165,13 @@ A comprehensive backend system for an e-commerce platform demonstrating real-wor
 - API documentation with Swagger/OpenAPI
 
 **Quick Links:**
-- [Project Overview](projects/ecommerce-backend/README.md)
-- [Implementation Guide](projects/ecommerce-backend/IMPLEMENTATION_GUIDE.md)
-- [API Specification](projects/ecommerce-backend/API_SPECIFICATION.md)
+
+- [Project Overview](ecommerce-backend/README.md)
+- [Implementation Guide](ecommerce-backend/IMPLEMENTATION_GUIDE.md)
+- [API Specification](ecommerce-backend/API_SPECIFICATION.md)
 
 **Key Features:**
+
 - Complete CRUD operations for products, categories, and users
 - Advanced product filtering and search capabilities
 - Strategic database indexing for optimal performance
@@ -180,9 +182,9 @@ A comprehensive backend system for an e-commerce platform demonstrating real-wor
 
 ## Getting Started
 
-1. **Explore the Documentation**: Start with the [Project Overview](projects/ecommerce-backend/README.md)
-2. **Review Implementation Guide**: Follow the [Step-by-Step Guide](projects/ecommerce-backend/IMPLEMENTATION_GUIDE.md) with code examples
-3. **Check API Specification**: Reference the [API Docs](projects/ecommerce-backend/API_SPECIFICATION.md) for endpoint details
+1. **Explore the Documentation**: Start with the [Project Overview](pecommerce-backend/README.md)
+2. **Review Implementation Guide**: Follow the [Step-by-Step Guide](ecommerce-backend/IMPLEMENTATION_GUIDE.md) with code examples
+3. **Check API Specification**: Reference the [API Docs](ecommerce-backend/API_SPECIFICATION.md) for endpoint details
 4. **Collaborate**: Connect with peers in the Discord channel
 5. **Contribute**: Share your learnings and improvements
 
