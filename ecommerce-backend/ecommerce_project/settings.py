@@ -77,32 +77,38 @@ TEMPLATES = [
 WSGI_APPLICATION = 'ecommerce_project.wsgi.application'
 
 # Database
-# Support both DATABASE_URL (Railway) and individual DB_* variables
-try:
+# Check if we have DATABASE_URL (from Railway)
+if os.environ.get('DATABASE_URL'):
     import dj_database_url
-    DATABASE_URL = os.environ.get('DATABASE_URL')
-    if DATABASE_URL:
+    DATABASES = {
+        'default': dj_database_url.config(
+            conn_max_age=600,
+            conn_health_checks=True,
+        )
+    }
+else:
+    # Fall back to individual DB_* variables for local development
+    db_engine = os.environ.get('DB_ENGINE', 'django.db.backends.sqlite3')
+    
+    if db_engine == 'django.db.backends.postgresql':
         DATABASES = {
-            'default': dj_database_url.config(
-                default=DATABASE_URL,
-                conn_max_age=600,
-                conn_health_checks=True,
-            )
+            'default': {
+                'ENGINE': db_engine,
+                'NAME': os.environ.get('DB_NAME', 'ecommerce_db'),
+                'USER': os.environ.get('DB_USER', 'postgres'),
+                'PASSWORD': os.environ.get('DB_PASSWORD', ''),
+                'HOST': os.environ.get('DB_HOST', 'localhost'),
+                'PORT': os.environ.get('DB_PORT', '5432'),
+            }
         }
     else:
-        raise ValueError("DATABASE_URL not set")
-except (ImportError, ValueError):
-    # Fallback to individual DB_* environment variables
-    DATABASES = {
-        'default': {
-            'ENGINE': os.environ.get('DB_ENGINE', 'django.db.backends.sqlite3'),
-            'NAME': os.environ.get('DB_NAME', str(BASE_DIR / 'db.sqlite3')),
-            'USER': os.environ.get('DB_USER', ''),
-            'PASSWORD': os.environ.get('DB_PASSWORD', ''),
-            'HOST': os.environ.get('DB_HOST', ''),
-            'PORT': os.environ.get('DB_PORT', ''),
+        # SQLite for local development
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': str(BASE_DIR / 'db.sqlite3'),
+            }
         }
-    }
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
