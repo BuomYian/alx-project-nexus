@@ -1,13 +1,13 @@
-version: '3.9'
+version: "3.9"
 
 services:
   db:
     image: postgres:15-alpine
     container_name: ecommerce_db
     environment:
-      POSTGRES_DB: ecommerce_db
+      POSTGRES_DB: railway
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres123
+      POSTGRES_PASSWORD: jnvdhDWNWrKNlZmYZNnYurkogwavyFXP
     ports:
       - "5432:5432"
     volumes:
@@ -32,13 +32,13 @@ services:
     ports:
       - "8000:8000"
     environment:
-      DEBUG: 'True'
+      DEBUG: "True"
       DB_ENGINE: django.db.backends.postgresql
-      DB_NAME: ecommerce_db
+      DB_NAME: railway
       DB_USER: postgres
-      DB_PASSWORD: postgres123
-      DB_HOST: db
-      DB_PORT: 5432
+      DB_PASSWORD: jnvdhDWNWrKNlZmYZNnYurkogwavyFXP
+      DB_HOST: nozomi.proxy.rlwy.net
+      DB_PORT: 58044
     depends_on:
       db:
         condition: service_healthy

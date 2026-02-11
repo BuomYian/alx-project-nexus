@@ -10,14 +10,14 @@ RUN apk add --no-cache \
     gcc \
     musl-dev
 
-# Copy requirements from ecommerce-backend
-COPY ecommerce-backend/requirements.txt .
+# Copy requirements
+COPY requirements.txt .
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy entire ecommerce-backend project
-COPY ecommerce-backend/ .
+# Copy project
+COPY . .
 
 # Create necessary directories
 RUN mkdir -p logs media staticfiles
