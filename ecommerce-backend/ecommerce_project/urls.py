@@ -13,8 +13,26 @@ from django.http import JsonResponse
 def health_check(request):
     return JsonResponse({"status": "ok"})
 
+def api_root(request):
+    return JsonResponse({
+        'status': 'ok',
+        'name': 'E-Commerce Backend API',
+        'version': '1.0.0',
+        'endpoints': {
+            'products': '/api/products/',
+            'categories': '/api/categories/',
+            'reviews': '/api/reviews/',
+            'auth': '/api/auth/',
+            'docs': '/api/docs/',
+            'redoc': '/api/redoc/',
+            'health': '/'
+        }
+    })
+
 urlpatterns = [
+    # Root & Health
     path('', health_check, name='health-check'),
+    path('api/', api_root, name='api-root'),
     # Admin
     path('admin/', admin.site.urls),
 
