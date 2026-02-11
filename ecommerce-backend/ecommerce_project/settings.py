@@ -79,13 +79,45 @@ WSGI_APPLICATION = 'ecommerce_project.wsgi.application'
 
 # Database
 # Use dj_database_url to parse DATABASE_URL (Railway provides this)
-# Falls back to SQLite for local development if DATABASE_URL is not set
-DATABASES = {
-    'default': dj_database_url.config(
-        default=f"sqlite:///{str(BASE_DIR / 'db.sqlite3')}",
-        conn_max_age=600,
-    )
-}
+# Falls back to individual DB_* variables for external databases
+import sys
+
+database_url = os.environ.get('DATABASE_URL')
+if database_url:
+    # Railway: Use PostgreSQL via DATABASE_URL
+    DATABASES = {
+        'default': dj_database_url.config(
+            conn_max_age=600,
+        )
+    }
+    print("✅ Using DATABASE_URL from environment", file=sys.stderr)
+else:
+    # Use individual DB_* environment variables if DATABASE_URL not set
+    db_engine = os.environ.get('DB_ENGINE', 'django.db.backends.sqlite3')
+    
+    if db_engine == 'django.db.backends.postgresql':
+        # PostgreSQL configuration
+        DATABASES = {
+            'default': {
+                'ENGINE': db_engine,
+                'NAME': os.environ.get('DB_NAME', 'ecommerce_db'),
+                'USER': os.environ.get('DB_USER', 'postgres'),
+                'PASSWORD': os.environ.get('DB_PASSWORD', ''),
+                'HOST': os.environ.get('DB_HOST', 'localhost'),
+                'PORT': os.environ.get('DB_PORT', '5432'),
+                'CONN_MAX_AGE': 600,
+            }
+        }
+        print(f"✅ Using PostgreSQL: {os.environ.get('DB_HOST')}", file=sys.stderr)
+    else:
+        # SQLite for local development
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': str(BASE_DIR / 'db.sqlite3'),
+            }
+        }
+        print("⚠️  DATABASE_URL not set, using SQLite", file=sys.stderr)
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [

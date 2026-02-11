@@ -12,30 +12,34 @@ The e-commerce backend serves as a practical learning ground where participants 
 ✅ **Build and document** RESTful APIs for seamless frontend integration  
 ✅ **Enhance performance** through strategic query optimization and database indexing  
 ✅ **Implement security** measures with JWT authentication and authorization  
-✅ **Document comprehensively** using OpenAPI/Swagger standards  
+✅ **Document comprehensively** using OpenAPI/Swagger standards
 
 ---
 
 ## Project Goals
 
 ### 1. **CRUD APIs** 🔄
+
 - Build complete Create, Read, Update, Delete operations for products and categories
 - Implement user authentication and management features using JWT tokens
 - Ensure data integrity and validation at the API level
 
 ### 2. **Advanced Filtering, Sorting & Pagination** 🔍
+
 - Implement robust filtering logic for product discovery (by category, price range, attributes)
 - Enable sorting by multiple criteria (price, date, popularity)
 - Implement pagination for efficient handling of large datasets
 - Optimize query performance for real-world scale
 
 ### 3. **Database Optimization** ⚡
+
 - Design a high-performance relational database schema
 - Implement strategic indexing on frequently queried columns
 - Use database best practices for data normalization
 - Monitor and optimize query execution plans
 
 ### 4. **API Documentation & Testing** 📚
+
 - Generate API documentation using Swagger/OpenAPI
 - Provide interactive API testing through documented endpoints
 - Create clear usage examples for frontend integration
@@ -45,25 +49,30 @@ The e-commerce backend serves as a practical learning ground where participants 
 ## Technologies Used
 
 ### Backend Framework
+
 - **Django** (v3.2+): Full-featured web framework for building scalable APIs
 - **Django REST Framework**: For building robust RESTful APIs
 - **Python** (v3.9+): Core programming language
 
 ### Database
+
 - **PostgreSQL**: Enterprise-grade relational database for optimized performance
 - **SQLAlchemy/Django ORM**: For database abstraction and query building
 
 ### Authentication & Security
+
 - **JWT (JSON Web Tokens)**: For stateless, secure user authentication
 - **Django-CORS-Headers**: For handling cross-origin requests
 - **Django-Filter**: For implementing advanced filtering
 
 ### API Documentation & Testing
+
 - **Swagger/OpenAPI**: For interactive API documentation
 - **DRF Spectacular**: Django REST Framework integration with OpenAPI
 - **Postman**: For API testing and collection management
 
 ### Additional Tools
+
 - **Git**: Version control and collaboration
 - **Docker**: Containerization for consistent environments (optional)
 - **Pytest**: Unit and integration testing framework
@@ -75,6 +84,7 @@ The e-commerce backend serves as a practical learning ground where participants 
 ### 1️⃣ CRUD Operations
 
 #### Products Management
+
 ```
 POST   /api/products/              - Create a new product
 GET    /api/products/              - List all products
@@ -84,6 +94,7 @@ DELETE /api/products/<id>/         - Delete a product
 ```
 
 #### Categories Management
+
 ```
 POST   /api/categories/            - Create a new category
 GET    /api/categories/            - List all categories
@@ -93,6 +104,7 @@ DELETE /api/categories/<id>/       - Delete a category
 ```
 
 #### User Authentication
+
 ```
 POST   /api/auth/register/         - User registration
 POST   /api/auth/login/            - User login
@@ -105,23 +117,27 @@ PUT    /api/users/<id>/            - Update user profile
 ### 2️⃣ Advanced API Features
 
 #### Filtering
+
 - **By Category**: `/api/products/?category=electronics`
 - **By Price Range**: `/api/products/?min_price=100&max_price=500`
 - **By Attributes**: `/api/products/?brand=Sony&color=Black`
 - **Text Search**: `/api/products/?search=smartphone`
 
 #### Sorting
+
 - **By Price**: `/api/products/?ordering=price` or `?ordering=-price`
 - **By Popularity**: `/api/products/?ordering=-sales_count`
 - **By Date**: `/api/products/?ordering=-created_at`
 - **By Rating**: `/api/products/?ordering=-average_rating`
 
 #### Pagination
+
 - **Page-based**: `/api/products/?page=1&page_size=20`
 - **Limit-Offset**: `/api/products/?limit=20&offset=0`
 - **Cursor-based**: `/api/products/?cursor=cD00NQ==` (for large datasets)
 
 ### 3️⃣ API Documentation
+
 - **Swagger UI**: Interactive API documentation at `/api/docs/`
 - **ReDoc**: Alternative API documentation at `/api/redoc/`
 - **OpenAPI Schema**: Machine-readable schema at `/api/schema/`
@@ -134,6 +150,7 @@ PUT    /api/users/<id>/            - Update user profile
 ### Key Tables
 
 #### Users Table
+
 ```sql
 users
 ├── id (PK)
@@ -149,6 +166,7 @@ users
 ```
 
 #### Categories Table
+
 ```sql
 categories
 ├── id (PK)
@@ -162,6 +180,7 @@ categories
 ```
 
 #### Products Table
+
 ```sql
 products
 ├── id (PK)
@@ -182,6 +201,7 @@ products
 ```
 
 #### Product Attributes Table
+
 ```sql
 product_attributes
 ├── id (PK)
@@ -192,6 +212,7 @@ product_attributes
 ```
 
 #### Reviews Table
+
 ```sql
 reviews
 ├── id (PK)
@@ -206,6 +227,7 @@ reviews
 ```
 
 ### Indexing Strategy
+
 ```sql
 CREATE INDEX idx_products_category_id ON products(category_id);
 CREATE INDEX idx_products_price ON products(price);
@@ -221,12 +243,14 @@ CREATE INDEX idx_reviews_user_id ON reviews(user_id);
 ## Implementation Process
 
 ### Phase 1: Project Setup
+
 - [ ] Initialize Django project with PostgreSQL
 - [ ] Set up virtual environment and dependencies
 - [ ] Configure environment variables and settings
 - [ ] Initialize Git repository
 
 ### Phase 2: Database & Models
+
 - [ ] Design database schema
 - [ ] Create Django models for Users, Categories, Products, Reviews
 - [ ] Implement model relationships and constraints
@@ -234,6 +258,7 @@ CREATE INDEX idx_reviews_user_id ON reviews(user_id);
 - [ ] Add strategic indexes for performance
 
 ### Phase 3: Authentication & Security
+
 - [ ] Implement JWT authentication
 - [ ] Create user registration and login endpoints
 - [ ] Implement token refresh and logout logic
@@ -241,12 +266,14 @@ CREATE INDEX idx_reviews_user_id ON reviews(user_id);
 - [ ] Secure endpoints with proper authorization checks
 
 ### Phase 4: Core CRUD APIs
+
 - [ ] Implement Product CRUD operations
 - [ ] Implement Category CRUD operations
 - [ ] Add user profile management endpoints
 - [ ] Implement input validation and error handling
 
 ### Phase 5: Advanced Features
+
 - [ ] Implement filtering with django-filter
 - [ ] Add sorting capabilities
 - [ ] Implement pagination (page-based and cursor-based)
@@ -254,6 +281,7 @@ CREATE INDEX idx_reviews_user_id ON reviews(user_id);
 - [ ] Implement review and rating system
 
 ### Phase 6: Documentation & Testing
+
 - [ ] Integrate DRF Spectacular for Swagger generation
 - [ ] Add docstrings and inline documentation
 - [ ] Create unit tests for models
@@ -261,6 +289,7 @@ CREATE INDEX idx_reviews_user_id ON reviews(user_id);
 - [ ] Generate API documentation
 
 ### Phase 7: Performance Optimization
+
 - [ ] Analyze and optimize database queries
 - [ ] Implement query result caching
 - [ ] Add database connection pooling
@@ -268,6 +297,7 @@ CREATE INDEX idx_reviews_user_id ON reviews(user_id);
 - [ ] Implement rate limiting
 
 ### Phase 8: Deployment & Hosting
+
 - [ ] Prepare for production deployment
 - [ ] Set up CI/CD pipeline
 - [ ] Deploy to hosting platform
@@ -326,57 +356,64 @@ git commit -m "refactor: improve error handling in authentication"
 ## API Endpoints Summary
 
 ### Authentication Endpoints
-| Method | Endpoint | Purpose |
-|--------|----------|---------|
-| POST | `/api/auth/register/` | User registration |
-| POST | `/api/auth/login/` | User login with JWT generation |
-| POST | `/api/auth/refresh/` | Refresh JWT token |
-| POST | `/api/auth/logout/` | User logout |
+
+| Method | Endpoint              | Purpose                        |
+| ------ | --------------------- | ------------------------------ |
+| POST   | `/api/auth/register/` | User registration              |
+| POST   | `/api/auth/login/`    | User login with JWT generation |
+| POST   | `/api/auth/refresh/`  | Refresh JWT token              |
+| POST   | `/api/auth/logout/`   | User logout                    |
 
 ### Product Endpoints
-| Method | Endpoint | Purpose |
-|--------|----------|---------|
-| GET | `/api/products/` | List products with filters, sort, pagination |
-| POST | `/api/products/` | Create new product |
-| GET | `/api/products/{id}/` | Get product details |
-| PUT | `/api/products/{id}/` | Update product |
-| DELETE | `/api/products/{id}/` | Delete product |
+
+| Method | Endpoint              | Purpose                                      |
+| ------ | --------------------- | -------------------------------------------- |
+| GET    | `/api/products/`      | List products with filters, sort, pagination |
+| POST   | `/api/products/`      | Create new product                           |
+| GET    | `/api/products/{id}/` | Get product details                          |
+| PUT    | `/api/products/{id}/` | Update product                               |
+| DELETE | `/api/products/{id}/` | Delete product                               |
 
 ### Category Endpoints
-| Method | Endpoint | Purpose |
-|--------|----------|---------|
-| GET | `/api/categories/` | List all categories |
-| POST | `/api/categories/` | Create new category |
-| GET | `/api/categories/{id}/` | Get category details |
-| PUT | `/api/categories/{id}/` | Update category |
-| DELETE | `/api/categories/{id}/` | Delete category |
+
+| Method | Endpoint                | Purpose              |
+| ------ | ----------------------- | -------------------- |
+| GET    | `/api/categories/`      | List all categories  |
+| POST   | `/api/categories/`      | Create new category  |
+| GET    | `/api/categories/{id}/` | Get category details |
+| PUT    | `/api/categories/{id}/` | Update category      |
+| DELETE | `/api/categories/{id}/` | Delete category      |
 
 ### User Endpoints
-| Method | Endpoint | Purpose |
-|--------|----------|---------|
-| GET | `/api/users/{id}/` | Get user profile |
-| PUT | `/api/users/{id}/` | Update user profile |
-| GET | `/api/users/{id}/orders/` | Get user orders |
+
+| Method | Endpoint                  | Purpose             |
+| ------ | ------------------------- | ------------------- |
+| GET    | `/api/users/{id}/`        | Get user profile    |
+| PUT    | `/api/users/{id}/`        | Update user profile |
+| GET    | `/api/users/{id}/orders/` | Get user orders     |
 
 ### Review Endpoints
-| Method | Endpoint | Purpose |
-|--------|----------|---------|
-| GET | `/api/products/{id}/reviews/` | Get product reviews |
-| POST | `/api/products/{id}/reviews/` | Add product review |
-| PUT | `/api/reviews/{id}/` | Update review |
-| DELETE | `/api/reviews/{id}/` | Delete review |
+
+| Method | Endpoint                      | Purpose             |
+| ------ | ----------------------------- | ------------------- |
+| GET    | `/api/products/{id}/reviews/` | Get product reviews |
+| POST   | `/api/products/{id}/reviews/` | Add product review  |
+| PUT    | `/api/reviews/{id}/`          | Update review       |
+| DELETE | `/api/reviews/{id}/`          | Delete review       |
 
 ---
 
 ## Submission Details
 
 ### API Deployment
+
 - Host the API on a cloud platform (Heroku, DigitalOcean, AWS, Google Cloud, etc.)
 - Ensure production-ready security configurations
 - Publish comprehensive API documentation (Swagger/Postman)
 - Provide base URL and authentication instructions
 
 ### Repository Structure
+
 ```
 ecommerce-backend/
 ├── README.md
@@ -430,6 +467,7 @@ ecommerce-backend/
 ## Evaluation Criteria
 
 ### 1. ✅ Functionality
+
 - [x] CRUD APIs fully functional for products, categories, and users
 - [x] User authentication with JWT implementation
 - [x] Filtering logic working correctly (by category, price, attributes)
@@ -439,6 +477,7 @@ ecommerce-backend/
 - [x] All endpoints return appropriate status codes and error messages
 
 ### 2. ✅ Code Quality
+
 - [x] Clean, readable, and maintainable code
 - [x] Proper separation of concerns (models, views, serializers)
 - [x] Consistent naming conventions throughout
@@ -449,6 +488,7 @@ ecommerce-backend/
 - [x] Proper error handling and logging
 
 ### 3. ✅ User Experience
+
 - [x] Comprehensive API documentation (Swagger/OpenAPI)
 - [x] Clear error messages and status codes
 - [x] Consistent API response format
@@ -457,6 +497,7 @@ ecommerce-backend/
 - [x] Easy frontend integration with clear endpoints
 
 ### 4. ✅ Version Control
+
 - [x] Frequent and descriptive commit messages
 - [x] Logical commit history showing progression
 - [x] Well-organized repository structure
@@ -470,21 +511,22 @@ ecommerce-backend/
 
 Target performance metrics:
 
-| Metric | Target |
-|--------|--------|
-| List Products (1000+ items) | < 200ms |
-| Filter Products | < 300ms |
-| Get Product Details | < 100ms |
-| Create Product | < 150ms |
+| Metric                          | Target  |
+| ------------------------------- | ------- |
+| List Products (1000+ items)     | < 200ms |
+| Filter Products                 | < 300ms |
+| Get Product Details             | < 100ms |
+| Create Product                  | < 150ms |
 | Authentication (Login/Register) | < 200ms |
-| Database Query Response | < 50ms |
-| API Response Time (p95) | < 500ms |
+| Database Query Response         | < 50ms  |
+| API Response Time (p95)         | < 500ms |
 
 ---
 
 ## Getting Started
 
 ### Prerequisites
+
 - Python 3.9+
 - PostgreSQL 12+
 - pip and virtualenv
